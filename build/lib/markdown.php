@@ -1730,7 +1730,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 	# Extra variables used during extra transformations.
 	var $footnotes = array();
 	var $footnotes_ordered = array();
-	var $abbr_desciptions = array();
+	var $abbr_descriptions = array();
 	var $abbr_word_re = '';
 	
 	# Give the current footnote number.
@@ -1745,7 +1745,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 		
 		$this->footnotes = array();
 		$this->footnotes_ordered = array();
-		$this->abbr_desciptions = array();
+		$this->abbr_descriptions = array();
 		$this->abbr_word_re = '';
 		$this->footnote_counter = 1;
 		
@@ -1753,7 +1753,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 			if ($this->abbr_word_re)
 				$this->abbr_word_re .= '|';
 			$this->abbr_word_re .= preg_quote($abbr_word);
-			$this->abbr_desciptions[$abbr_word] = trim($abbr_desc);
+			$this->abbr_descriptions[$abbr_word] = trim($abbr_desc);
 		}
 	}
 	
@@ -1763,7 +1763,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 	#
 		$this->footnotes = array();
 		$this->footnotes_ordered = array();
-		$this->abbr_desciptions = array();
+		$this->abbr_descriptions = array();
 		$this->abbr_word_re = '';
 		
 		parent::teardown();
@@ -2810,7 +2810,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 		if ($this->abbr_word_re)
 			$this->abbr_word_re .= '|';
 		$this->abbr_word_re .= preg_quote($abbr_word);
-		$this->abbr_desciptions[$abbr_word] = trim($abbr_desc);
+		$this->abbr_descriptions[$abbr_word] = trim($abbr_desc);
 		return ''; # String that will replace the block
 	}
 	
@@ -2833,8 +2833,8 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 	}
 	function _doAbbreviations_callback($matches) {
 		$abbr = $matches[0];
-		if (isset($this->abbr_desciptions[$abbr])) {
-			$desc = $this->abbr_desciptions[$abbr];
+		if (isset($this->abbr_descriptions[$abbr])) {
+			$desc = $this->abbr_descriptions[$abbr];
 			if (empty($desc)) {
 				return $this->hashPart("<abbr>$abbr</abbr>");
 			} else {
