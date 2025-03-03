@@ -1622,7 +1622,7 @@ class Markdown_Parser {
 	#
 	# Replace tabs with the appropriate amount of space.
 	#
-		# For each line we separate the line in blocks delemited by
+		# For each line we separate the line in blocks delimited by
 		# tab characters. Then we reconstruct every line by adding the 
 		# appropriate number of space between each blocks.
 		
