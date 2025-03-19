@@ -288,7 +288,7 @@ class Markdown_Parser {
 	function teardown() {
 	#
 	# Called after the transformation process to clear any variable 
-	# which may be taking up memory unnecessarly.
+	# which may be taking up memory unnecessarily.
 	#
 		$this->urls = array();
 		$this->titles = array();
