@@ -325,7 +325,7 @@ class Markdown_Parser {
 		$text = $this->hashHTMLBlocks($text);
 
 		# Strip any lines consisting only of spaces and tabs.
-		# This makes subsequent regexen easier to write, because we can
+		# This makes subsequent regexes easier to write, because we can
 		# match consecutive blank lines with /\n+/ instead of something
 		# contorted like /[ ]*\n+/ .
 		$text = preg_replace('/^[ ]+$/m', '', $text);
