@@ -965,7 +965,7 @@ class Markdown_Parser {
 			);
 
 		foreach ($markers_relist as $marker_re => $other_marker_re) {
-			# Re-usable pattern to match any entirel ul or ol list:
+			# Re-usable pattern to match any entire ul or ol list:
 			$whole_list_re = '
 				(								# $1 = whole list
 				  (								# $2
