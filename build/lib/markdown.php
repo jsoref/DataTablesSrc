@@ -1352,22 +1352,22 @@ class Markdown_Parser {
 		# Strip leading and trailing lines:
 		$text = preg_replace('/\A\n+|\n+\z/', '', $text);
 
-		$grafs = preg_split('/\n{2,}/', $text, -1, PREG_SPLIT_NO_EMPTY);
+		$paragraphs = preg_split('/\n{2,}/', $text, -1, PREG_SPLIT_NO_EMPTY);
 
 		#
 		# Wrap <p> tags and unhashify HTML blocks
 		#
-		foreach ($grafs as $key => $value) {
+		foreach ($paragraphs as $key => $value) {
 			if (!preg_match('/^B\x1A[0-9]+B$/', $value)) {
 				# Is a paragraph.
 				$value = $this->runSpanGamut($value);
 				$value = preg_replace('/^([ ]*)/', "<p>", $value);
 				$value .= "</p>";
-				$grafs[$key] = $this->unhash($value);
+				$paragraphs[$key] = $this->unhash($value);
 			}
 			else {
 				# Is a block.
-				# Modify elements of @grafs in-place...
+				# Modify elements of @paragraphs in-place...
 				$graf = $value;
 				$block = $this->html_hashes[$graf];
 				$graf = $block;
@@ -1406,11 +1406,11 @@ class Markdown_Parser {
 //
 //					$graf = $div_open . "\n" . $div_content . "\n" . $div_close;
 //				}
-				$grafs[$key] = $graf;
+				$paragraphs[$key] = $graf;
 			}
 		}
 
-		return implode("\n\n", $grafs);
+		return implode("\n\n", $paragraphs);
 	}
 
 
@@ -2618,12 +2618,12 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 		# Strip leading and trailing lines:
 		$text = preg_replace('/\A\n+|\n+\z/', '', $text);
 		
-		$grafs = preg_split('/\n{2,}/', $text, -1, PREG_SPLIT_NO_EMPTY);
+		$paragraphs = preg_split('/\n{2,}/', $text, -1, PREG_SPLIT_NO_EMPTY);
 
 		#
 		# Wrap <p> tags and unhashify HTML blocks
 		#
-		foreach ($grafs as $key => $value) {
+		foreach ($paragraphs as $key => $value) {
 			$value = trim($this->runSpanGamut($value));
 			
 			# Check if this should be enclosed in a paragraph.
@@ -2633,11 +2633,11 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 			if ($is_p) {
 				$value = "<p>$value</p>";
 			}
-			$grafs[$key] = $value;
+			$paragraphs[$key] = $value;
 		}
 		
-		# Join grafs in one text, then unhash HTML tags. 
-		$text = implode("\n\n", $grafs);
+		# Join paragraphs in one text, then unhash HTML tags. 
+		$text = implode("\n\n", $paragraphs);
 		
 		# Finish by removing any tag hashes still present in $text.
 		$text = $this->unhash($text);
