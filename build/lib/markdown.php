@@ -2120,7 +2120,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 			
 			if (count($parts) < 3) {
 				#
-				# End of $text reached with unbalenced tag(s).
+				# End of $text reached with unbalanced tag(s).
 				# In that case, we return original text unchanged and pass the
 				# first character as filtered to prevent an infinite loop in the 
 				# parent function.
